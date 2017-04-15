@@ -13,12 +13,15 @@ body {
 }
 
 body {
-    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    /*font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .text-vertical-center {
     display: table-cell;
     text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
     vertical-align: middle;
 }
 
@@ -62,6 +65,7 @@ body {
 hr.small {
     max-width: 100px;
 }
+
 
 /* Side Menu */
 
@@ -188,7 +192,7 @@ hr.small {
     width: 100%;
     height: 400px;
     color: #fff;
-    background: url("callout.jpg") no-repeat center center scroll;
+    background: url("man.jpg") no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -199,6 +203,7 @@ hr.small {
 
 .portfolio {
     padding: 50px 0;
+    background-color: #ddd;
 }
 
 .portfolio-item {
@@ -250,4 +255,5 @@ footer {
   position: fixed;
   bottom: 5px;
   right: 5px;
+  border-radius: 50%;
 }

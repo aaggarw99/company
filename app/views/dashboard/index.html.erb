@@ -5,8 +5,148 @@
     <title>Dashboard</title>
   </head>
   <body>
-    <h1>welcome</h1>
-    <%=link_to "Sign Out", destroy_user_session_path, :method=>:delete %>
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <%if user_signed_in?%>
+            <li class="sidebar-brand">
+                <a href="/dashboard" onclick=$("#menu-close").click();><%=current_user.first_name%></a>
+            </li>
+            <%else%>
+            <li class="sidebar-brand">
+                <a href="" onclick=$("#menu-close").click();><%= link_to "Sign In", new_user_session_path %>
+                </a>
+            </li>
+            <%end%>
+
+
+            <li>
+                <a href="/" onclick=$("#menu-close").click();>Home</a>
+            </li>
+            <%if user_signed_in?%>
+            <li>
+                <a href="/dashboard" onclick=$("#menu-close").click();>Dashboard</a>
+            </li>
+            <%end%>
+
+
+            <li>
+                <a href="#about" onclick=$("#menu-close").click();>About</a>
+            </li>
+            <li>
+                <a href="#services" onclick=$("#menu-close").click();>Students</a>
+            </li>
+            <li>
+                <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
+            </li>
+
+            <% if user_signed_in? %>
+            <li>
+              <%=link_to "Sign Out", destroy_user_session_path, :method=>:delete %>
+           </li>
+            <% end %>
+        </ul>
+    </nav>
+    <div class="col-lg-12 col-sm-12">
+    <div class="card hovercard">
+        <div class="card-background">
+            <%= image_tag("userdefault.png", class: "card-bkimg")%>
+        </div>
+        <div class="useravatar">
+            <%= image_tag("userdefault.png", class: "card-bkimg")%>
+        </div>
+        <div class="card-info"> <span class="card-title"><%=current_user.first_name%> <%=current_user.last_name%></span>
+
+        </div>
+    </div>
+    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+            <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="fa fa-book" aria-hidden="true"></span>
+                <div class="hidden-xs">About</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="fa fa-briefcase" aria-hidden="true"></span>
+                <div class="hidden-xs">Work</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="fa fa-pencil" aria-hidden="true"></span>
+                <div class="hidden-xs">Contact</div>
+            </button>
+        </div>
+    </div>
+
+        <div class="well">
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="tab1">
+          <p>
+            Email: <%=current_user.email%>
+          </p>
+
+          <p>
+            City: <%=current_user.location%>
+          </p>
+          <p>
+            School / University
+          </p>
+          <p>
+
+          </p>
+        </div>
+        <div class="tab-pane fade in" id="tab2">
+          <h3>This is tab 2</h3>
+        </div>
+        <div class="tab-pane fade in" id="tab3">
+          <h3>This is tab 3</h3>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+    <!-- Javascript -->
+
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+    // JavaScript for Tab system
+    $(document).ready(function() {
+      $(".btn-pref .btn").click(function () {
+          $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+          // $(".tab").addClass("active"); // instead of this do the below
+          $(this).removeClass("btn-default").addClass("btn-primary");
+      });
+    });
+
+    </script>
+    <!-- <%=link_to "Sign Out", destroy_user_session_path, :method=>:delete %> -->
 
   </body>
 </html>
