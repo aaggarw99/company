@@ -23,3 +23,29 @@
  hr > .small {
    border-top-color: black;
  }
+ #vertical-grad {
+    height: 100%;
+    background: #4ba8ab; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#bdbdbd, #ffae19); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#bdbdbd, #ffae19); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#bdbdbd, #ffae19); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#bdbdbd, #ffae19); /* Standard syntax (must be last) */
+}
+
+.panel-login {
+  margin-top: 40%;
+  border:1px solid #d3d3d3;
+}
+
+.panel-register {
+  margin-top: 10%;
+  border:1px solid #d3d3d3;
+
+}
+
+
+#register-logo, #login-logo {
+  text-align:center;
+  padding: 15px;
+  font-size: 24px;
+}

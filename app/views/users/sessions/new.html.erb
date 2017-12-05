@@ -1,6 +1,3 @@
-<h2>Log in</h2>
-
-
 
 <!--
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -25,56 +22,118 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %> -->
+<body id = "vertical-grad">
+  <!-- Navigation -->
+  <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+  <nav id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+          <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+          <%if user_signed_in?%>
+          <li class="sidebar-brand">
+              <a href="/dashboard" onclick=$("#menu-close").click();><%=current_user.first_name%></a>
+          </li>
+          <%else%>
+          <li class="sidebar-brand">
+              <a href="" onclick=$("#menu-close").click();><%= link_to "Sign In", new_user_session_path %>
+              </a>
+          </li>
+          <%end%>
 
-<div class="container">
-      <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-login">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-6">
-              <%= link_to "Login", new_user_session_path, :class => 'active' %>
+
+          <li>
+              <a href="/" onclick=$("#menu-close").click();>Home</a>
+          </li>
+          <%if user_signed_in?%>
+          <li>
+              <a href="/dashboard" onclick=$("#menu-close").click();>Dashboard</a>
+          </li>
+          <%end%>
+
+
+          <li>
+              <a href="#about" onclick=$("#menu-close").click();>About</a>
+          </li>
+          <li>
+              <a href="#services" onclick=$("#menu-close").click();>Students</a>
+          </li>
+          <li>
+              <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
+          </li>
+
+          <% if user_signed_in? %>
+          <li>
+            <%=link_to "Sign Out", destroy_user_session_path, :method=>:delete %>
+         </li>
+          <% end %>
+      </ul>
+  </nav>
+  <div class="container">
+        <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-login">
+          <div class="panel-heading">
+            <div id="login-logo">
+              Login
             </div>
-            <div class="col-xs-6">
-              <%= link_to "Register", new_user_registration_path %>
+            <div class="row">
+              <div class="col-xs-6 text-center">
+                <%= link_to "Login", new_user_session_path, :class => 'active btn btn-primary btn-sm' %>
+              </div>
+              <div class="col-xs-6 text-center">
+                <%= link_to "Register", new_user_registration_path, :class => 'btn btn-primary btn-sm' %>
+              </div>
             </div>
+            <hr>
           </div>
-          <hr>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-                <%= devise_error_messages! %>
-                <div class="form-group">
-                  <%= f.label :email %><br />
-                  <%= f.email_field :email, autofocus: true, :class => 'form-control', placeholder: "johndoe@gmail.com" %>
-                </div>
-                <div class="form-group">
-                  <%= f.label :password %><br />
-                  <%= f.password_field :password, autocomplete: "off", :class => 'form-control' %>
-                </div>
-                <div class="form-group">
-                  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-                    <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-                  <% end -%>
-                </div>
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                      <%= f.submit "Log in" , :class => 'form-control'%>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <%= devise_error_messages! %>
+                  <div class="form-group">
+                    <!-- <%= f.label :email %><br /> -->
+                    <%= f.email_field :email, autofocus: true, :class => 'form-control', placeholder: "Email", required: true %>
+                  </div>
+                  <div class="form-group">
+                    <!-- <%= f.label :password %><br /> -->
+                    <%= f.password_field :password, autocomplete: "off", :class => 'form-control', placeholder: "Password", required:true%>
+                  </div>
+                  <div class="form-group">
+                    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                      <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+                    <% end -%>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <%= f.submit "Log in" , :class => 'form-control btn btn-success'%>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <% end %>
+                  <% end %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</body>
+
+
+<script>
+// Closes the sidebar menu
+$("#menu-close").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+});
+// Opens the sidebar menu
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+});
+</script>
 
 
 <%= render "users/shared/links" %>
